@@ -5,3 +5,13 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+body {
+    font-family: monospace;
+}
+
+section.game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
