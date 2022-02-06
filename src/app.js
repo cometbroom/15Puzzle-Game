@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const gBoard = document.querySelector(".game");
+    const gBoard = document.querySelector(".p15");
     const topMsg = document.querySelector(".top-msg h2");
     let blocks = [];
 
