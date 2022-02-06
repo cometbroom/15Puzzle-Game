@@ -8,12 +8,35 @@
 
 body {
   font-family: monospace;
+  background-color: aqua;
 }
 
 section.game {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
+  padding: 10px 0px;
+}
+section.game .p15 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  background-color: aqua;
+  border: 1px solid gray;
+  padding: 10px;
+  border-radius: 3px;
+}
+section.game .p15 .block {
+  text-align: center;
+  background-color: white;
+  font-size: 2em;
+  padding: 10px;
+  height: 100%;
+  width: 100%;
+  border-radius: 3px;
 }
 
 /*# sourceMappingURL=style.css.map */
