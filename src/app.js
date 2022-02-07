@@ -60,7 +60,7 @@ function move(dir) {
             break;
     }
     blocks[p].innerHTML = blocks[pos.x + pos.y * 4].innerHTML;
-    blocks[pos.x + pos.y * 4].innerHTML = 0;
+    blocks[pos.x + pos.y * 4].innerHTML = "";
 }
 
 function possibleMove(moveArr) {
