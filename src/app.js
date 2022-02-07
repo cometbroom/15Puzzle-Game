@@ -35,7 +35,15 @@ function shuffleBoard() {
 }
 
 function move(dir) {
+    /*We can get our 2d position on a 1d array by decoupling
+        Our y dimension to a summation variable. in this case y*4
+        */
     let p = pos.x + pos.y * 4;
+    //1 2 4 8 for performance as it's 2^0 2^1 2^2 2^3
+    //1 for up move
+    //2 for right
+    //3 for down
+    //4 for left
     switch (dir) {
         case 1:
             pos.y--;
