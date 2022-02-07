@@ -71,10 +71,17 @@ function possibleMove(moveArr) {
 }
 
 function blockClicked(e) {
-    let elementId = e.srcElement.id.replace(/^\D+/g, "");
+    let elementId = parseInt(e.srcElement.id.replace(/^\D+/g, ""));
 
-    console.log(e.srcElement.innerHTML);
-    console.log(elementId);
+    let posTgt = { x: elementId % 4, y: Math.floor(elementId / 4) };
+    let diff = { x: posTgt.x - pos.x, y: posTgt.y - pos.y };
+    if (Math.abs(diff.x) > 1) return;
+    if (Math.abs(diff.y) > 1) return;
+    if (Math.abs(diff.y) >= 1 && Math.abs(diff.x) >= 1) return;
+    if (diff.x === 1) move(2);
+    if (diff.x === -1) move(8);
+    if (diff.y === 1) move(4);
+    if (diff.y === -1) move(1);
 }
 
 function setupClickEvents(el) {
