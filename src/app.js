@@ -5,21 +5,22 @@ let topMsg;
 let pos = { x: 3, y: 3 };
 function createBoard() {
     for (let i = 0; i < 15; ++i) {
-        let block = createBlock("block", i + 1);
+        let block = createBlock("block", i + 1, `b${i}`);
         blocks.push(block);
         gBoard.appendChild(block);
     }
-    let finalBlock = createBlock("block", 0);
+    let finalBlock = createBlock("block", 0, `b15`);
     finalBlock.classList.add("empty");
     blocks.push(finalBlock);
     gBoard.appendChild(finalBlock);
 }
 
-function createBlock(cls, inner) {
+function createBlock(cls, inner, id) {
     let block = document.createElement("div");
 
     block.classList.add(cls);
     block.innerHTML = inner;
+    block.id = id;
 
     return block;
 }
@@ -69,12 +70,27 @@ function possibleMove(moveArr) {
     if (pos.y > 0) moveArr.push(1);
 }
 
+function blockClicked(e) {
+    let elementId = e.srcElement.id.replace(/^\D+/g, "");
+
+    console.log(e.srcElement.innerHTML);
+    console.log(elementId);
+}
+
+function setupClickEvents(el) {
+    for (let i = 0; i < el.length; ++i) {
+        el[i].addEventListener("click", blockClicked);
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     gBoard = document.querySelector(".p15");
     topMsg = document.querySelector(".top-msg h2");
     topMsg.innerHTML = "Welcome";
     createBoard();
     shuffleBoard();
+    setupClickEvents(blocks);
+
     /*
 	- When clicked on a block, see which side has empty block and move it there
 	- Randomize numbers with unique random function
