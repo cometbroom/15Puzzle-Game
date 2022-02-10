@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
     topMsg = document.querySelector(".top-msg h2");
     topMsg.innerHTML = "Welcome";
     createBoard();
-    //    shuffleBoard();
+    shuffleBoard();
     setupClickEvents(blocks);
 
     /*
