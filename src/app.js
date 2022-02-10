@@ -47,23 +47,41 @@ Initialize board
 
 //Create our board's children elements.
 function createBoard() {
-    for (let i = 0; i < 15; ++i) {
-        let block = createBlock("block", i + 1, `b${i}`);
+    let block;
+
+    for (let i = 0; i < 16; ++i) {
+        if (i === 15) {
+            block = createBlock("block", 0, `b${i}`);
+            block.classList.add("empty");
+        } else {
+            block = createBlock("block", i + 1, `b${i}`);
+        }
+        switch (i % 4) {
+            case 0:
+                block.style.gridColumn = "1/2";
+                break;
+            case 1:
+                block.style.gridColumn = "2/3";
+                break;
+            case 2:
+                block.style.gridColumn = "3/4";
+                break;
+            case 3:
+                block.style.gridColumn = "4/5";
+                break;
+        }
+        // 1/2 2/3 3/4 4/5
         blocks.push(block);
         gBoard.appendChild(block);
     }
-    let finalBlock = createBlock("block", 0, `b15`);
-    finalBlock.classList.add("empty");
-    blocks.push(finalBlock);
-    gBoard.appendChild(finalBlock);
 }
 
 function createBlock(cls, inner, id) {
     //Create a new div element
     let block = document.createElement("div");
-
-    //Add class from parameter
-    block.classList.add(cls);
+    block.style.gridColumn =
+        //Add class from parameter
+        block.classList.add(cls);
     block.innerHTML = inner;
     //Number our blocks so we can handle the events better
     block.id = id;
