@@ -262,7 +262,7 @@ function blockClicked(e) {
 function blockHovered(e) {
     let elementId = e.srcElement.id;
     gsap.to(`#${elementId}`, {
-        rotation: 5,
+        rotation: 2,
         duration: 0.2,
     });
 }
