@@ -63,6 +63,7 @@ function createBoard() {
     genGridArea(blocks, { x: 4, y: 4, spanX: 1, spanY: 1 });
 }
 
+//Takes all elements iterates over them and assigns a specific grid-area.
 function genGridArea(els, options) {
     for (let i = 0; i < els.length; ++i) {
         //Get column number by modo our x dim
@@ -160,8 +161,11 @@ function winCheck() {
     let currentArr = blocks.map((x) => parseInt(x.innerHTML) || 0);
 
     if (currentArr.equals(winArr) === true) {
-        topMsg.innerHTML = "You win!";
         gameMsg.innerHTML = "You win!";
+        gameMsg.style.opacity = "1";
+        gameMsg.style.height = "80%";
+        gameMsg.style.width = "90%";
+        gameMsg.style.fontSize = "30px";
     }
 }
 

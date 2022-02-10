@@ -38,7 +38,22 @@ section.game {
             cursor: pointer;
         }
         .game-msg {
-            grid-area: 2/2/4/4;
+            grid-area: 2/1/4/5;
+            z-index: 2;
+            background-color: white;
+            border-radius: 3px;
+            height: 0;
+            width: 0;
+            font-size: 0;
+            justify-self: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid gray;
+            opacity: 0;
+            transition: height cubic-bezier(0.64, 0.57, 0.67, 1.53) 0.3s,
+                width cubic-bezier(0.64, 0.57, 0.67, 1.53) 0.3s;
+            transition: font-size 0.7s ease-in, opacity 0.5s;
         }
     }
 }
