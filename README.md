@@ -13,5 +13,6 @@ This is an immitation of the puzzle 15 game I made with HTML-CSS and Javascript.
 ### Feature task-list:
 
 1. Undo button
-2. Hint
-3. Better animation
+2. Sounds
+3. Hint
+4. Better animation
