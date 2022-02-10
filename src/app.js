@@ -2,6 +2,12 @@ let blocks = [];
 let gBoard;
 let topMsg;
 let gameMsg;
+let boardPrepared = false;
+
+//Prototype method additions
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 //Taken from https://stackoverflow.com/questions/7837456/how-to-compare-arrays-in-javascript
 // Warn if overriding existing method
@@ -137,11 +143,20 @@ function move(dir) {
             pos.x--;
             break;
     }
+    let aniDirs = {};
+
+    if (boardPrepared === true) {
+        aniDirs = getAnimationDir(dir);
+
+        animationDo(p, aniDirs);
+        winCheck();
+        return;
+    }
     //Swap our previous selected tile p with the new one.
+    //This gets called only for shuffle as theres no wincheck and animation needed.
     blocks[p].innerHTML = blocks[pos.oneDim()].innerHTML;
     //Set the tile that was the target of the move to empty.
     blocks[pos.oneDim()].innerHTML = "";
-    winCheck();
 }
 
 function possibleMove(moveArr) {
@@ -155,11 +170,56 @@ function possibleMove(moveArr) {
     if (pos.y > 0) moveArr.push(1);
 }
 
+//
+/*
+Animation
+*/
+//
+
+function getAnimationDir(dir) {
+    switch (dir) {
+        case 1:
+            return { a: "down", b: "down-t" };
+        case 2:
+            return { a: "left", b: "left-r" };
+        case 4:
+            return { a: "up", b: "up-b" };
+        case 8:
+            return { a: "right", b: "right-l" };
+    }
+}
+
+async function animationDo(p, aniDirs) {
+    let bStyle = blocks[p].style;
+    let tStyle = blocks[pos.oneDim()].style;
+
+    tStyle.animation = `move${aniDirs.a} 0.1s forwards`;
+    await sleep(100).then(() => {
+        blocks[p].innerHTML = blocks[pos.oneDim()].innerHTML;
+        bStyle.animation = `move${aniDirs.b} 0.1s forwards`;
+        tStyle.animation = "none";
+    });
+    blocks[pos.oneDim()].innerHTML = "";
+
+    await sleep(100).then(() => {
+        bStyle.animation = "none";
+    });
+}
+
+function animateTile(tgt, dir) {
+    blocks[tgt].style.animation = `move${dir}`;
+}
+
+//
+/*
+Win logic
+*/
+//
+
 function winCheck() {
     let winArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0];
 
     let currentArr = blocks.map((x) => parseInt(x.innerHTML) || 0);
-
     if (currentArr.equals(winArr) === true) {
         gameMsg.innerHTML = "You win!";
         gameMsg.style.opacity = "1";
@@ -216,6 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
     topMsg.innerHTML = "Welcome";
     createBoard();
     shuffleBoard();
+    boardPrepared = true;
     setupClickEvents(blocks);
 
     /*

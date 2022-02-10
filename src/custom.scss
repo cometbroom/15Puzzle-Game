@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+:root {
+    --anim-length: 40px;
+}
+
 body {
     font-family: monospace;
     background-color: aqua;
@@ -19,7 +23,8 @@ section.game {
     padding: 10px 0px;
     .p15 {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, 70px);
+        grid-template-rows: repeat(4, minmax(0, 70px));
         gap: 10px;
         justify-content: center;
         align-items: center;
@@ -28,14 +33,16 @@ section.game {
         padding: 10px;
         border-radius: 3px;
         .block {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background-color: rgb(255, 255, 255);
             font-size: 2em;
-            padding: 10px;
             height: 100%;
             width: 100%;
             border-radius: 3px;
             cursor: pointer;
+            overflow: hidden;
         }
         .game-msg {
             grid-area: 2/1/4/5;
@@ -55,5 +62,74 @@ section.game {
                 width cubic-bezier(0.64, 0.57, 0.67, 1.53) 0.3s;
             transition: font-size 0.7s ease-in, opacity 0.5s;
         }
+    }
+}
+
+@keyframes movedown {
+    from {
+        padding-top: 0px;
+    }
+    to {
+        padding-top: var(--anim-length);
+    }
+}
+
+@keyframes movedown-t {
+    from {
+        padding-bottom: var(--anim-length);
+    }
+    to {
+        padding-bottom: 0px;
+    }
+}
+@keyframes moveup {
+    from {
+        padding-bottom: 0px;
+    }
+    to {
+        padding-bottom: var(--anim-length);
+    }
+}
+
+@keyframes moveup-b {
+    from {
+        padding-top: var(--anim-length);
+    }
+    to {
+        padding-top: 0px;
+    }
+}
+@keyframes moveleft {
+    from {
+        padding-right: 0px;
+    }
+    to {
+        padding-right: var(--anim-length);
+    }
+}
+
+@keyframes moveleft-r {
+    from {
+        padding-left: var(--anim-length);
+    }
+    to {
+        padding-left: 0px;
+    }
+}
+@keyframes moveright {
+    from {
+        padding-left: 0px;
+    }
+    to {
+        padding-left: var(--anim-length);
+    }
+}
+
+@keyframes moveright-l {
+    from {
+        padding-right: var(--anim-length);
+    }
+    to {
+        padding-right: 0px;
     }
 }
