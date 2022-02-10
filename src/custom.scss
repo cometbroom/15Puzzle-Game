@@ -37,5 +37,8 @@ section.game {
             border-radius: 3px;
             cursor: pointer;
         }
+        .game-msg {
+            grid-area: 2/2/4/4;
+        }
     }
 }

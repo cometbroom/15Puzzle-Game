@@ -39,5 +39,8 @@ section.game .p15 .block {
   border-radius: 3px;
   cursor: pointer;
 }
+section.game .p15 .game-msg {
+  grid-area: 2/2/4/4;
+}
 
 /*# sourceMappingURL=style.css.map */

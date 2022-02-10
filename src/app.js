@@ -1,6 +1,7 @@
 let blocks = [];
 let gBoard;
 let topMsg;
+let gameMsg;
 
 //Taken from https://stackoverflow.com/questions/7837456/how-to-compare-arrays-in-javascript
 // Warn if overriding existing method
@@ -56,23 +57,24 @@ function createBoard() {
         } else {
             block = createBlock("block", i + 1, `b${i}`);
         }
-        switch (i % 4) {
-            case 0:
-                block.style.gridColumn = "1/2";
-                break;
-            case 1:
-                block.style.gridColumn = "2/3";
-                break;
-            case 2:
-                block.style.gridColumn = "3/4";
-                break;
-            case 3:
-                block.style.gridColumn = "4/5";
-                break;
-        }
-        // 1/2 2/3 3/4 4/5
         blocks.push(block);
         gBoard.appendChild(block);
+    }
+    genGridArea(blocks, { x: 4, y: 4, spanX: 1, spanY: 1 });
+}
+
+function genGridArea(els, options) {
+    for (let i = 0; i < els.length; ++i) {
+        //Get column number by modo our x dim
+        let col = i % options.x;
+        //Add area to column with span
+        els[i].style.gridColumn = `${col + options.spanX}/span ${
+            options.spanX
+        }`;
+        //Get row by dividing our y dim
+        let row = Math.floor(i / options.y);
+        //Add to style.
+        els[i].style.gridRow = `${row + options.spanY}/ span ${options.spanY}`;
     }
 }
 
@@ -157,11 +159,9 @@ function winCheck() {
 
     let currentArr = blocks.map((x) => parseInt(x.innerHTML) || 0);
 
-    console.log(currentArr);
-
     if (currentArr.equals(winArr) === true) {
         topMsg.innerHTML = "You win!";
-        console.log("you win");
+        gameMsg.innerHTML = "You win!";
     }
 }
 
@@ -208,6 +208,7 @@ DOM Loaded
 document.addEventListener("DOMContentLoaded", () => {
     gBoard = document.querySelector(".p15");
     topMsg = document.querySelector(".top-msg h2");
+    gameMsg = document.querySelector(".game-msg");
     topMsg.innerHTML = "Welcome";
     createBoard();
     shuffleBoard();
