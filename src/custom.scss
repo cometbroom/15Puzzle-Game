@@ -8,11 +8,12 @@
 
 :root {
     --anim-length: 40px;
+    --bg-light-blue: rgb(157, 240, 240);
 }
 
 body {
     font-family: monospace;
-    background-color: aqua;
+    background-color: var(--bg-light-blue);
 }
 
 section.game {
@@ -23,12 +24,12 @@ section.game {
     padding: 10px 0px;
     .p15 {
         display: grid;
-        grid-template-columns: repeat(4, 70px);
-        grid-template-rows: repeat(4, minmax(0, 70px));
+        grid-template-columns: repeat(4, 100px);
+        grid-template-rows: repeat(4, minmax(0, 100px));
         gap: 10px;
         justify-content: center;
         align-items: center;
-        background-color: aqua;
+        background-color: rgb(255, 255, 255);
         border: 1px solid gray;
         padding: 10px;
         border-radius: 3px;
@@ -43,6 +44,32 @@ section.game {
             border-radius: 3px;
             cursor: pointer;
             overflow: hidden;
+            background: linear-gradient(
+                    135deg,
+                    #ffffff 21px,
+                    #d9ecff 22px,
+                    #d9ecff 24px,
+                    transparent 24px,
+                    transparent 67px,
+                    #d9ecff 67px,
+                    #d9ecff 69px,
+                    transparent 69px
+                ),
+                linear-gradient(
+                        225deg,
+                        #ffffff 21px,
+                        #d9ecff 22px,
+                        #d9ecff 24px,
+                        transparent 24px,
+                        transparent 67px,
+                        #d9ecff 67px,
+                        #d9ecff 69px,
+                        transparent 69px
+                    )
+                    0 64px;
+            background-color: #ffffff;
+            background-size: 64px 128px;
+            border: 2px solid black;
         }
         .game-msg {
             grid-area: 2/1/4/5;

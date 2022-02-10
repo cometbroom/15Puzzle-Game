@@ -147,7 +147,6 @@ function move(dir) {
 
     if (boardPrepared === true) {
         aniDirs = getAnimationDir(dir);
-
         animationDo(p, aniDirs);
         winCheck();
         return;
@@ -238,6 +237,10 @@ Events
 function blockClicked(e) {
     //Replace any letter with empty so we only get the number (of the tile) in the id
     let elementId = parseInt(e.srcElement.id.replace(/^\D+/g, ""));
+    gsap.to(`#${e.srcElement.id}`, {
+        rotation: 0,
+        duration: 0.2,
+    });
 
     //translate 1d ids to 2d
     let posTgt = { x: elementId % 4, y: Math.floor(elementId / 4) };
@@ -256,10 +259,27 @@ function blockClicked(e) {
     if (diff.y === -1) move(1);
 }
 
+function blockHovered(e) {
+    let elementId = e.srcElement.id;
+    gsap.to(`#${elementId}`, {
+        rotation: 5,
+        duration: 0.2,
+    });
+}
+function blockLeft(e) {
+    let elementId = e.srcElement.id;
+    gsap.to(`#${elementId}`, {
+        rotation: 0,
+        duration: 0.2,
+    });
+}
+
 function setupClickEvents(el) {
     //Add our click event to all the block elements
     for (let i = 0; i < el.length; ++i) {
         el[i].addEventListener("click", blockClicked);
+        el[i].addEventListener("mouseover", blockHovered);
+        el[i].addEventListener("mouseleave", blockLeft);
     }
 }
 
@@ -273,7 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
     gBoard = document.querySelector(".p15");
     topMsg = document.querySelector(".top-msg h2");
     gameMsg = document.querySelector(".game-msg");
-    topMsg.innerHTML = "Welcome";
+    topMsg.innerHTML = "Rearrange the boxes to get 1 through 15";
     createBoard();
     shuffleBoard();
     boardPrepared = true;
